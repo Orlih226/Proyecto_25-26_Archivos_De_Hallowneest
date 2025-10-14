@@ -28,7 +28,7 @@ class Visual:
    # Bloque de texto 1 en la celda (0, 1)
    self.text1.insert("1.0", "")
    self.text1.config(height= 20)
-   self.text1.grid(row=0, column=1,sticky="w")
+   self.text1.grid(row=0, column=1,sticky="")
    #Label para decir que son la descripcion de eventos
    self.label1.grid(row = 1, column=1, sticky="n")
    # Bloque de texto 2 en la celda (1, 0) con colspan
@@ -39,8 +39,9 @@ class Visual:
 
   def ListarEventos(self,json):
         for x in range(len(json["Eventos en ejecucion"])):
-           self.text2.insert("1.0",f"{json["Eventos en ejecucion"][x]}")
-          
+           self.text1.insert("1.0",f"{json["Eventos en ejecucion"][x]}\n")
+  def VerDetallesEvento(self,json, numero):
+           self.text2.insert("1.0",f"El evento es:{json["Eventos en ejecucion"][numero][0]}\n Es de: {json["Eventos en ejecucion"][numero][3]} \n Con la profe:{json["Eventos en ejecucion"][numero][4]} \n El grupo: {json["Eventos en ejecucion"][numero][5]} \n En el aula: {json["Eventos en ejecucion"][numero][6]}")
 
 class TrabajoDeEventos:
    
@@ -48,8 +49,7 @@ class TrabajoDeEventos:
         pass
     def AgregarEvento(evento):
         pass
-    def VerDetallesEvento(evento):
-        pass
+   
 class ExtraerJson:
    def Extraer(archivo):
      with open(archivo) as json_file:
@@ -65,6 +65,6 @@ class RequisitosDeEventos:
 #print(profes['Profesores'][1])
 eventosej = ExtraerJson.Extraer("EventosEjec.json")
 r1 = Visual()
-r1.ListarEventos(eventosej)
+r1.VerDetallesEvento(eventosej,1)
 r1.MostrarGrafica()
 
