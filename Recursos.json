@@ -1,0 +1,6 @@
+{
+ "Profesores":["Idania", "Ernesto","Javier","Yudivian","Cecilia"],
+ "Aulas": ["Aula1","Aula2","Aula3","Aula4","Aula5","Aula6","Laboratorio"],
+ "Grupos": ["C111","C121","C122","D111"],
+ "Recursos": ["Proyector"]
+}

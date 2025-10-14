@@ -1,0 +1,46 @@
+/// Tipos de datos
+  Python sigue usando los mismos tipos de datos tradicionales de los diferentes lenguajes de programacion, ademas sigue las reglas basicas, de la precedencia y la asociatividad (las operaciones numericas siguen el orden estandar). Algo curioso que tiene python es que no se debe declarar el tipo de la variable variables antes de nombrarlas, osea en C# para crear una variable se debe escribir: ( [tipo de la variable] + [nombre] + "=" + [valor] : Ejemplo int lado = 6;), sin embargo en python basta con escribir el nombre y declarar valor, osea: ( [nombre de la variable] +  "=" + [valor] : Ejemplo: a = 5). LO anterior se debe a que python es un lenguaje dinamico que evalua los objetos en el momento de ejecucion. Una manera basica de definir los tipos de objetos en python es la siguiente:
+1- Numeros : 1, 0.2, -1, 3+4j, 
+2- Strings: 'spam', "Bob's", b'a\x01c'
+3- Lists : [1,2,3,4,5,6,7,8,9,10] 
+4- Dictionary : {'food': 'spam', 'taste':'yum'}
+5- Tuples: (1, 'spam', 4, 'U')
+6- Files
+7 - Sets
+8- Boolean : true, false
+Dominio:
+ El dominio a tratar sera un escuela para guiarme, luego sera remplazados con elementos de hospital
+Estructura:
+   Por ahora sera en consola, luego intentare con turtle
+   El usuario entrara y le dira:
+   Buenas, que desea hacer
+   tendra varias opciones: Da los dias exactos de un mes, y seleccionar uno
+    En ese seleccionado el usuario podra:
+      Listar los eventos
+      Agregar eventos
+      Eliminar eventos existentes
+      Ver detalles de un evento
+
+No tengo especificado, sin embargo, por ahora:
+   hare un inventario fijo que tenga todos los objetos  que pueda usar en eventos
+   Hare los nombres de los eventos fijos, haciendo que el usuario escoja uno, luego intentare hacerlos con nombres personalizble y objetos fijos
+   La estructura del mes, cada dia sera un txt o un diccionario que me llevara a un json
+   Todo evento sera de una hora y media o dos horas
+
+El json aulas, debo renombrarlo, tiene como elemento un diccionario que muestra los eventos disponibles:
+  clase practica tiene 5 true: profesor, alumno ayudante, aula, grupo y horario disponible
+  clase teorica tiene 4 true: profesor, aula , grupo y horario disponible
+  Estos true significan que solo ocurrira si se cumple cada true, hare que un for recorra la lista y si todos son true, anade el evento
+  Hay que tener en cuenta que en una misma hora pueden haber mil eventos, mientras se cumplan las condiciones
+  Esto hace que tenga que anadir dos variables en profesores, disponible, donde devuelva true si a esa hora no realiza otra cosa
+
+Esto carga el json:
+with open("Profesores.json") as json_file:
+    data = js.load(json_file) # Asigna a data un diccionario con lo interno del json
+
+EL de eventos pondra todos los tipos de eventos que puede hacer el muchacho y las restricciones particulares que tiene
+Recursos tendra los Recursos
+EventosEjec tendra una lista de lista, por ejemplo un elemento seria:
+["Clase Teorica Analisis","1", "4", "9:00 a 10:30", "Idania", "C121", "Aula 5"]  
+Evento, dia, mes, hora, profe, grupo, aula
+  

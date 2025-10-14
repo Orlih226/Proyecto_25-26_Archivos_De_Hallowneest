@@ -1,0 +1,22 @@
+{
+  "Eventos":
+  [
+    {
+      "Clase teorica": [true, true, true], 
+      "Profes": ["Idania", "Ernesto","Javier","Yudivian","Cecilia"],
+      "Asignaturas": ["AM","Logica","Algebra","Filosofia"],
+      "Restricciones": 
+      [{"Analisis": ["Idania", "Ernesto"]}, {"Algebra": ["Cecilia", "Joel"]}]
+      
+    },
+    {
+      "Clase practica": [true, true, true,true]
+    },
+    {
+      "Junta de ano": [true, true, true]
+    },
+    {
+      "Clase Deportiva": [true, true, true]
+    }
+  ]
+}
