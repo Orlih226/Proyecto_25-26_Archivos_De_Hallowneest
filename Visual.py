@@ -76,7 +76,7 @@ class Visual1:
         self.listbox2V6 = tk.Listbox(self.fondo2)
         self.listbox2V6.config(width=12,height=4,selectmode="single")
         self.listbox2V7 = tk.Listbox(self.fondo2)
-        self.listbox2V7.config(width=12,height=4,selectmode="multiple")
+        self.listbox2V7.config(width=12,height=4,selectmode="single")
        
         self.diasM = []
         self.diasN = []
@@ -84,7 +84,12 @@ class Visual1:
         self.asig = ""
         self.profes = []
         self.profe =""
-       
+        self.grupo = ""
+        self.grupos =[]
+        self.aula = ""
+        self.aulas = []
+        self.year = ""
+
         self.listbox2V2.bind("<<ListboxSelect>>", self.EscogerMesesListbox)
       
         self.listbox2V1.bind("<<ListboxSelect>>", self.EscogerDiasListbox)
@@ -98,7 +103,14 @@ class Visual1:
         self.listbox2V5.bind("<<ListboxSelect>>", self.EscogerProfe)
         self.listbox2V5.bind("<Enter>",self.MostrarProfe)
 
-        self.listbox2V6.bind("<<ListboxSelect>>", self.EscogerDiasListbox)
+        self.listbox2V6.bind("<<ListboxSelect>>", self.EscogerGrupo)
+        self.listbox2V6.bind("<Enter>",self.MostrarGrupo)
+
+        self.listbox2V7.bind("<<ListboxSelect>>", self.EscogerAula)
+        self.MostrarAula()
+      
+
+      
 
         self.botonCrear = tk.Button(self.fondo2,text="Crear Evento/s",command=self.Generador)
         self.botonR = tk.Button(self.fondo2,command=self.Esconder,height=2,width=5,text="Salir")
@@ -234,18 +246,19 @@ class Visual1:
     def MostrarDiasListBox(self,event):
         self.listbox2V1.delete(0,tk.END)
         lista = self.diasM[:]
-        li =[]
-        for x in lista:
-           li.append(x)
         l = []
+        if len(self.text3B.get("1.0","1.end")) == 4 and self.text3B.get("1.0","1.end").isdigit() and int(self.text3B.get("1.0","1.end"))>=2025:
+            yearn = int(self.text3B.get("1.0","1.end"))
+            self.year = yearn
        # year = datetime.datetime.strptime(self.cal.get_date(),"%m/%d/%y").year[1] 
-        for x in range(0,len(li)):
-            monthN = li[x]+1
-            l.append(calendar.monthrange(month=monthN,year=2025)[1])
-        if len(li)>0:
-         self.diasN = l[:]
-         for x in range(0,min(l)):
-             self.listbox2V1.insert(x,x+1)
+            for x in range(0,len(lista)):
+                l.append(calendar.monthrange(month=lista[x],year=yearn)[1])   
+            if len(l)>0:
+                   self.diasN = l[:]
+                   for x in range(0,min(l)):
+                     self.listbox2V1.insert(x,x+1)
+    
+              
 
     def MostrarTiposListBox(self):
         json = ExtraerJson.Extraer("Eventos.json")
@@ -273,12 +286,10 @@ class Visual1:
            key = list(key["Eventos"][self.tipoDevento].keys())
            self.asig = key[tipo] 
 
-
     def EscogerProfe(self,event):
          tipo = self.listbox2V5.curselection()
          if len(tipo) >0:
            self.profe = self.profes[tipo[0]]
-           print(self.profe)
            self.listbox2V5.delete(0,tk.END)
            self.MostrarProfe()
            
@@ -290,26 +301,37 @@ class Visual1:
             for x in range(len(lista)):
                  self.listbox2V5.insert(x,lista[x])
         
+
+    def EscogerGrupo(self,event):
+         tipo = self.listbox2V6.curselection()
+         if len(tipo) >0:
+           self.grupo = self.grupos[tipo[0]]
+           self.listbox2V6.delete(0,tk.END)
+           self.MostrarGrupo()
+
+    def MostrarGrupo(self,event=None):
+         json = ExtraerJson.Extraer("Eventos.json")
+         if self.asig and self.tipoDevento != "":
+            lista = json["Eventos"][self.tipoDevento][self.asig]['Grupos']
+            self.grupos = lista
+            for x in range(len(lista)):
+                 self.listbox2V6.insert(x,lista[x])
+
     def EscogerAula(self,event):
-        pass
+         tipo = self.listbox2V7.curselection()
+         if len(tipo) >0:
+           self.aula = self.aulas[tipo[0]]
+          
     def MostrarAula(self):
-        pass
-    def EscogerGrupo(self):
-        pass     
+         json = ExtraerJson.Extraer("Eventos.json")
+         lista = json["Aulas"]
+         self.aulas = lista
+         for x in range(len(lista)):
+                 self.listbox2V7.insert(x,lista[x])             
           
     def ValoresGrid(self):
         for x in range(len(self.meses)):
             self.listbox.insert(x+1,self.meses[x+1]) 
-
-    def CambiarDias(self,event):
-        yearn = ""
-        if len(self.text3B.get("1.0",tk.END)) == 4 and self.text3B.get("1.0",tk.END).isdigit() and int(self.text3B.get("1.0",tk.END))>=2025:
-            year = self.text3B.get("1.0",tk.END)
-        meses = {"Enero":"JANUARY","Febrero":"FEBRUARY","Marzo":"MARCH","Abril":"APRIL","Mayo":"MAY","Junio":"JUNE","Julio":"JULY","Agosto":"AUGUST","Septiembre":"SEPTEMBER","Octubre":"OCTOBER","Noviembre":"NOVEMBER","Diciembre":"DECEMBER"}    
-        if yearn != "":
-            self.GenerarDias(calendar.monthrange(year=yearn, month=meses[self.opciones_meses.get]))
-            dias = self.dias
-        print(dias)    
 
     def Interfaz2(self):
         self.newroot.deiconify()
@@ -319,10 +341,10 @@ class Visual1:
         evento = f"{self.tipoDevento} {self.asig}"
         dias = self.diasN[:]
         meses = self.diasM[:]
-        
+        year = self.year
+        aula = self.aula
         profe = self.profe
-        print(evento,dias,meses,profe)
-
+        print(year,meses,dias,evento,aula,profe)
 
 
 
