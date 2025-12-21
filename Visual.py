@@ -17,7 +17,7 @@ class Visual1:
         #////////////////////////////////////////////////////////////// Crear ventana principal //////////////////////////////////////////////////
         self.root.minsize(1200, 800)
         self.root.title("Gestor de Eventos")
-        self.root.geometry("1200x700")
+        self.root.geometry("100x500")
         
         
         self.root.protocol("WM_DELETE_WINDOW",self.Cerrar)
@@ -47,7 +47,36 @@ class Visual1:
         self.key=  list(key["Eventos"].keys()) 
         self.lista = []
         
-        
+         #///////////////////////////////////////////////////////////////////// En la principal Configurar el grid /////////////////////////////////////////////////////////////
+        self.root.columnconfigure(0, weight=1)
+        self.root.columnconfigure(1, weight=1)
+        self.root.rowconfigure(0, weight=1)
+        self.root.rowconfigure(1, weight=1)
+
+        #///////////////////////////////////////////////// Calendario en la celda (0, 0) ///////////////////////////////////////////////////////////
+        self.cal.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+
+        #////////////////////////////////////////////////// Label para decir que son los eventos en ese dia ///////////////////////////////////////////////////
+        self.label2.grid(row=0, column=1, sticky="n", padx=10, pady=10)
+
+        #//////////////////////////////////////////////////////////// Label para decir que son la descripcion de eventos /////////////////////////////////////////
+        self.label1.grid(row=1, column=1, sticky="n")
+
+        #//////////////////////////////////////////////////////// Bloque de texto 2 en la celda (1, 1)  /////////////////////////////////////////////////////////
+        self.text2.insert("1.0", " ")
+        self.text2.grid(row=1, column=1, columnspan=1, sticky="")
+
+        #////////////////////////////////////////////////////// Listbox //////////////////////////////////////////////////////////////////////////////////////////
+        self.listbox.grid(row=0, column=1, padx=10, pady=10, sticky="sew")
+        self.listbox.bind("<<ListboxSelect>>", self.HallarPosicion)
+        self.cal.bind("<<CalendarSelected>>", self.HallarDiayMes)
+
+        #/////////////////////////////////////////////// Botones De Salir, Agregar Evento, Eliminar Evento ////////////////////////////////////////////////////////////////
+        self.boton1.grid(row=1, column=0, sticky="w")
+        self.boton1.config(text="Salir", height=2, width=5, command=lambda: self.root.destroy())
+        self.boton2.config(text="Salir")
+        self.boton2.config(command=self.Interfaz2 )
+        self.boton2.grid(row=1, column=0, sticky="e")
         #////////////////////////////// Elementos de la segunda interfaz ////////////////////////////////////////////////////////////////
         #Esto incluye lo visual de la segunda
         
@@ -103,14 +132,7 @@ class Visual1:
         self.listbox2V5.bind("<<ListboxSelect>>", self.EscogerProfe)
         self.listbox2V5.bind("<Enter>",self.MostrarProfe)
 
-        self.listbox2V6.bind("<<ListboxSelect>>", self.EscogerGrupo)
-        self.listbox2V6.bind("<Enter>",self.MostrarGrupo)
-
-        self.listbox2V7.bind("<<ListboxSelect>>", self.EscogerAula)
-        self.MostrarAula()
-      
-
-      
+        self.listbox2V6.bind("<<ListboxSelect>>", self.EscogerDiasListbox)
 
         self.botonCrear = tk.Button(self.fondo2,text="Crear Evento/s",command=self.Generador)
         self.botonR = tk.Button(self.fondo2,command=self.Esconder,height=2,width=5,text="Salir")
@@ -130,7 +152,7 @@ class Visual1:
         self.Label10b = tk.Label(self.fondo2,height=2,width=12,text="Seleccione\nel Grupo"); self.Label10b.place( in_=self.fondo2,x=798,y=150)
         self.Label11b = tk.Label(self.fondo2,height=2,width=12,text="Seleccione\nel Aula"); self.Label11b.place( in_=self.fondo2,x=890,y=150)
         
-        
+       #///////////////////////////////////////////////////Ubicacion///////////////////////////////// 
         self.text1B.place(in_=self.fondo2,x=30,y=200)
         self.text2B.place( in_=self.fondo2,x=125,y=200)
         self.text3B.place( in_=self.fondo2,x=223,y=200)
@@ -145,38 +167,6 @@ class Visual1:
         self.listbox2V7.place(in_=self.fondo2,x=895,y=200)
  
        
-        
-
-        #///////////////////////////////////////////////////////////////////// En la principal Configurar el grid /////////////////////////////////////////////////////////////
-        self.root.columnconfigure(0, weight=1)
-        self.root.columnconfigure(1, weight=1)
-        self.root.rowconfigure(0, weight=1)
-        self.root.rowconfigure(1, weight=1)
-
-        #///////////////////////////////////////////////// Calendario en la celda (0, 0) ///////////////////////////////////////////////////////////
-        self.cal.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
-
-        #////////////////////////////////////////////////// Label para decir que son los eventos en ese dia ///////////////////////////////////////////////////
-        self.label2.grid(row=0, column=1, sticky="n", padx=10, pady=10)
-
-        #//////////////////////////////////////////////////////////// Label para decir que son la descripcion de eventos /////////////////////////////////////////
-        self.label1.grid(row=1, column=1, sticky="n")
-
-        #//////////////////////////////////////////////////////// Bloque de texto 2 en la celda (1, 1)  /////////////////////////////////////////////////////////
-        self.text2.insert("1.0", " ")
-        self.text2.grid(row=1, column=1, columnspan=1, sticky="")
-
-        #////////////////////////////////////////////////////// Listbox //////////////////////////////////////////////////////////////////////////////////////////
-        self.listbox.grid(row=0, column=1, padx=10, pady=10, sticky="sew")
-        self.listbox.bind("<<ListboxSelect>>", self.HallarPosicion)
-        self.cal.bind("<<CalendarSelected>>", self.HallarDiayMes)
-
-        #/////////////////////////////////////////////// Botones De Salir, Agregar Evento, Eliminar Evento ////////////////////////////////////////////////////////////////
-        self.boton1.grid(row=1, column=0, sticky="w")
-        self.boton1.config(text="Salir", height=2, width=5, command=lambda: self.root.destroy())
-        self.boton2.config(text="Salir")
-        self.boton2.config(command=self.Interfaz2 )
-        self.boton2.grid(row=1, column=0, sticky="e")
 
         
 
@@ -189,7 +179,6 @@ class Visual1:
     def HallarPosicion(self, event):
         seleccion = self.listbox.curselection()
         # Aprovecho y ajusto en la misma posicion los detalles de evento
-       
         self.text2.delete(1.0, tk.END)
         if len(self.lista)>0:
          self.text2.insert("1.0", f"Evento: {self.lista[seleccion[0]][3]}"
@@ -199,7 +188,6 @@ class Visual1:
                                  f"\nGrupo: {self.lista[seleccion[0]][5]}\nAula: {self.lista[seleccion[0]][6]}")
         
     def ListarEventos(self):
-
         json = ExtraerJson.Extraer("EventosEjec.json")
         date = datetime.datetime.strptime(self.cal.get_date(), "%m/%d/%y")
         self.lista = []
@@ -251,14 +239,13 @@ class Visual1:
             yearn = int(self.text3B.get("1.0","1.end"))
             self.year = yearn
        # year = datetime.datetime.strptime(self.cal.get_date(),"%m/%d/%y").year[1] 
-            for x in range(0,len(lista)):
-                l.append(calendar.monthrange(month=lista[x],year=yearn)[1])   
-            if len(l)>0:
-                   self.diasN = l[:]
-                   for x in range(0,min(l)):
-                     self.listbox2V1.insert(x,x+1)
-    
-              
+        for x in range(0,len(li)):
+            monthN = li[x]+1
+            l.append(calendar.monthrange(month=monthN,year=2025)[1])
+        if len(li)>0:
+         self.diasN = l[:]
+         for x in range(0,min(l)):
+             self.listbox2V1.insert(x,x+1)
 
     def MostrarTiposListBox(self):
         json = ExtraerJson.Extraer("Eventos.json")
@@ -301,22 +288,6 @@ class Visual1:
             for x in range(len(lista)):
                  self.listbox2V5.insert(x,lista[x])
         
-
-    def EscogerGrupo(self,event):
-         tipo = self.listbox2V6.curselection()
-         if len(tipo) >0:
-           self.grupo = self.grupos[tipo[0]]
-           self.listbox2V6.delete(0,tk.END)
-           self.MostrarGrupo()
-
-    def MostrarGrupo(self,event=None):
-         json = ExtraerJson.Extraer("Eventos.json")
-         if self.asig and self.tipoDevento != "":
-            lista = json["Eventos"][self.tipoDevento][self.asig]['Grupos']
-            self.grupos = lista
-            for x in range(len(lista)):
-                 self.listbox2V6.insert(x,lista[x])
-
     def EscogerAula(self,event):
          tipo = self.listbox2V7.curselection()
          if len(tipo) >0:
@@ -344,7 +315,8 @@ class Visual1:
         year = self.year
         aula = self.aula
         profe = self.profe
-        print(year,meses,dias,evento,aula,profe)
+        print(evento,dias,meses,profe)
+
 
 
 
