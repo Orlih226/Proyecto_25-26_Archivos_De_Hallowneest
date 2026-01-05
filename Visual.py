@@ -1,6 +1,6 @@
 import datetime
 import tkinter as tk
-import json as js
+from TrabajoConJson import ExtraerJson
 from tkcalendar import Calendar
 import calendar
 
@@ -132,8 +132,12 @@ class Visual1:
         self.listbox2V5.bind("<<ListboxSelect>>", self.EscogerProfe)
         self.listbox2V5.bind("<Enter>",self.MostrarProfe)
 
-        self.listbox2V6.bind("<<ListboxSelect>>", self.EscogerDiasListbox)
+        self.listbox2V6.bind("<<ListboxSelect>>", self.EscogerGrupo)
+        self.listbox2V6.bind("<Enter>",self.MostrarGrupo)
 
+        self.listbox2V7.bind("<<ListboxSelect>>", self.EscogerAula)
+        self.MostrarAula()
+      
         self.botonCrear = tk.Button(self.fondo2,text="Crear Evento/s",command=self.Generador)
         self.botonR = tk.Button(self.fondo2,command=self.Esconder,height=2,width=5,text="Salir")
 
@@ -239,14 +243,13 @@ class Visual1:
             yearn = int(self.text3B.get("1.0","1.end"))
             self.year = yearn
        # year = datetime.datetime.strptime(self.cal.get_date(),"%m/%d/%y").year[1] 
-        for x in range(0,len(li)):
-            monthN = li[x]+1
-            l.append(calendar.monthrange(month=monthN,year=2025)[1])
-        if len(li)>0:
-         self.diasN = l[:]
-         for x in range(0,min(l)):
-             self.listbox2V1.insert(x,x+1)
-
+            for x in range(0,len(lista)):
+                l.append(calendar.monthrange(month=lista[x],year=yearn)[1])   
+            if len(l)>0:
+                   self.diasN = l[:]
+                   for x in range(0,min(l)):
+                     self.listbox2V1.insert(x,x+1)
+    
     def MostrarTiposListBox(self):
         json = ExtraerJson.Extraer("Eventos.json")
         for x in json["Eventos"]:
@@ -288,6 +291,21 @@ class Visual1:
             for x in range(len(lista)):
                  self.listbox2V5.insert(x,lista[x])
         
+    def EscogerGrupo(self,event):
+         tipo = self.listbox2V6.curselection()
+         if len(tipo) >0:
+           self.grupo = self.grupos[tipo[0]]
+           self.listbox2V6.delete(0,tk.END)
+           self.MostrarGrupo()
+
+    def MostrarGrupo(self,event=None):
+         json = ExtraerJson.Extraer("Eventos.json")
+         if self.asig and self.tipoDevento != "":
+            lista = json["Eventos"][self.tipoDevento][self.asig]['Grupos']
+            self.grupos = lista
+            for x in range(len(lista)):
+                 self.listbox2V6.insert(x,lista[x])
+
     def EscogerAula(self,event):
          tipo = self.listbox2V7.curselection()
          if len(tipo) >0:
@@ -315,20 +333,7 @@ class Visual1:
         year = self.year
         aula = self.aula
         profe = self.profe
-        print(evento,dias,meses,profe)
+        print(year,meses,dias,evento,aula,profe)
 
 
-
-
-
-
-class ExtraerJson:
-    def Extraer(archivo: str):  # Abre el json, archivo contiene el camino al json
-        with open(archivo) as json_file:  # Declara la variable json_file como un json a dict, dandole el valor del json
-            json = js.load(json_file)  # json sera igual al valor del json, traducido a diccionario
-        return json
-
-    def Escribir(archivo: str, json_nuevo):
-        with open(archivo, "w") as json_file:
-            js.dump(json_nuevo, json_file)
 

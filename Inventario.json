@@ -1,0 +1,25 @@
+{
+    "Ogrim":["Isma","Guardia","Combate","Mantenimiento","Exploracion"],
+    "Isma":["Ogrim","Guardia","Combate","Mantenimiento","Exploracion"],
+    "Hegemol":["Combate","Guardia","Mantenimiento"],
+    "Doliente Gris":["Guardia","Combate","Exploracion"],
+    "Brigada de Construccion":["Construccion","Mantenimiento"],
+    "Brigada de Mineria":["Mineria"],
+    "Cornifer":["Exploracion", "Construccion"],
+    "Hornet":["Combate","Exploracion","Relaciones"],
+    "Vasija Pura":["Combate","Exploracion","Relaciones"],
+    "Rey Palido":["Relaciones"],
+
+    "Cruces Olvidados":["Hornet","Hegemol","Cornifer","Brigada de Construccion","Doliente Gris","Ogrim","Isma","Rey Palido"],
+    "BocaSucia":["Hornet","Hegemol","Cornifer","Brigada de Construccion","Doliente Gris","Ogrim","Isma","Rey Palido"],
+    "Sendero Verde":["Hornet","Ogrim","Isma","Cornifer","Doliente Gris","Rey Palido"],
+    "Ciudad de Lagrimas":["Hornet","Hegemol","Cornifer","Brigada de Construccion","Doliente Gris","Rey Palido"],
+    "Jardines de la Reina":["Hornet","Hegemol","Ogrim","Isma","Doliente Gris","Brigada de Construccion","Rey Palido"],
+    "Nido Profundo":["Hornet","Rey Palido"],
+    "Paramos Fungicos":["Hornet","Ogrim","Isma","Cornifer","Rey Palido"],
+    "La Colmena":["Hornet","Rey Palido"],
+    "Canales Reales":["Ogrim","Isma","Cornifer"],
+    "Tierras de reposo":["Hornet","Doliente Gris","Cornifer","Rey Palido"],
+    "Cumbre de Cristal":["Hornet","Cornifer","Brigada de Mineria","Rey Palido"],
+    "Palacia Blanco":["Vasija Pura", "Hornet","Hegemol","Ogrim","Isma","Doliente Gris","Rey Palido"]
+}
