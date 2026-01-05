@@ -1,7 +1,1 @@
-{
-    "Eventos en ejecucion":
-    [
-        ["Clase Teorica Analisis","1", "4", "9:00 a 10:30", "Idania", "C121", "Aula 5"], ["Clase Teorica Analisis","1", "4", "9:00 a 10:30", "Idania", "C121", "Aula 5"] 
- 
-    ]
-}
+{"Eventos en ejecucion": {"2025": {"10": [["asdsd", "14:00 a 18:00", 1, 10, 2025, "Mantenimiento", "Cruces Olvidados", ["Brigada de Construccion", "Cornifer"]]], "2": [], "1": ["Trabajo de Jardineria", "10:00 a 14:00", 1, 1, 2025, "Construccion", "Cruces Olvidados", ["Brigada de Construccion"], ["rddffdsfsdf", "10:00 a 12:00", 1, 1, 2025, "Construccion", "Cruces Olvidados", ["Brigada de Construccion"]]]}}}

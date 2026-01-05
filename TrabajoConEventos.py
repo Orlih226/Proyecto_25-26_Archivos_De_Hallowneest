@@ -46,13 +46,3 @@ class RequisitosDeEventos:
                 else: continue
              else: continue
           else: continue  
-           # Aqui debo anadir el caso con uno mayor que el otro, en ambos sentidos, la idea es que si uno es mayor
-            # Digamos que A y B, Aevento , A>B, ahi comparo A los elementos iguales de A y los de B, osea los 7 primeros, lugo los otros
-            # Como no chocan, no afectan
-            # En el caso contrario, B>A
-         elif (len(eventos) > len(evento_nuevo)):
-            eventos_plus = eventos[7: len(eventos)]
-            evento_nuevo_plus = evento_nuevo[7: len(evento_nuevo)]
-            for items in evento_nuevo_plus:
-               if items in eventos_plus:
-                 val = False

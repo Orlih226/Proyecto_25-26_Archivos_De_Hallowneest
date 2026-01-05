@@ -7,7 +7,6 @@ class ExtraerJson:
      return json
    
    def Escribir(archivo,json_nuevo):
-      print(json_nuevo)
       with open(archivo,"w") as json_file:
          js.dump(json_nuevo,json_file)
          
