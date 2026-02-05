@@ -1,6 +1,5 @@
 import customtkinter as tk
-import calendar
-import tkinter 
+import calendar 
 from TrabajoConJson import ExtraerJson
 from tkcalendar import Calendar
 import math
@@ -517,19 +516,23 @@ class SegundaVentana:
                if inv ==[]:
                   pass
                elif inv[0][0]==1:
+                  flag = True
                   for y in inv[0][1]:
                      if y not in self.recursos:
+                        flag = False
                         break
+                  if flag == False:
+                     break   
+
                elif inv[0][0]==0:     
                     listaR =[]
                     for y in inv[0][1]:
                        if y in self.recursos:
-                          listaR.append(True)
+                          listaR.append(True)     
                     if True not in listaR:
                        break
            else:      
                  condicion2 = True
-            
            if condicion and condicion2:    
                    return eventos
            if condicion2 == False:
@@ -737,7 +740,6 @@ class SegundaVentana:
             pass
            else:
               listaL.append(list(n))
-      #  print(listaL)
         if type(self.jsonEcj) == dict:
           eventos =copy.deepcopy(self.jsonEcj)
           for x in listaL:

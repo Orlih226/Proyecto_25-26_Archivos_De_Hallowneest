@@ -28,7 +28,6 @@ class RequisitosDeEventos:
       validados = []          
       if len(lista)>0:
          for x in lista:
-       #     print(condicion[1])
             b= RequisitosDeEventos.Validar(x,condicion[1])  
             if type(b) == list:
                 validados.append(b[0]) 

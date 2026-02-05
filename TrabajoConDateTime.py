@@ -20,7 +20,6 @@ class ManejoDeTiempo:
 
     #Declara si una fecha es valida, revisando si el valor final 1 se encuentra entre el inicial o final de 2, o viceversa:
     if(y==None):
-    # print(hora1,hora2)
      if (hora_inicial_de_2 < hora_final_de_1 < hora_final_de_2) or (hora_inicial_de_2 < hora_inicial_de_1 < hora_final_de_2)or((hora_inicial_de_1<=hora_inicial_de_2)and (hora_final_de_1>=hora_final_de_2)) :
         return False
      else: return True

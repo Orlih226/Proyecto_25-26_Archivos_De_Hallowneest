@@ -51,7 +51,8 @@
             "Doliente Gris",
             "Ogrim",
             "Isma",
-            "Rey Palido"
+            "Rey Palido",
+             "Hollow Knight"
         ],
         "BocaSucia": [
             "Hornet",
@@ -76,6 +77,7 @@
             "Hegemol",
             "Cornifer",
             "Brigada de Construccion",
+             "Hollow Knight",
             "Doliente Gris",
             "Rey Palido"
         ],
@@ -86,6 +88,7 @@
             "Isma",
             "Doliente Gris",
             "Brigada de Construccion",
+             "Hollow Knight",
             "Rey Palido"
         ],
         "Nido Profundo": [
@@ -111,6 +114,7 @@
         "Tierras de reposo": [
             "Hornet",
             "Doliente Gris",
+             "Hollow Knight",
             "Cornifer",
             "Rey Palido"
         ],
@@ -121,7 +125,7 @@
             "Rey Palido"
         ],
         "Palacio Blanco": [
-            "Vasija Pura",
+            "Hollow Knight",
             "Hornet",
             "Hegemol",
             "Ogrim",
