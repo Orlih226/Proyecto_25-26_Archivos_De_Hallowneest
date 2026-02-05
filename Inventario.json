@@ -1,11 +1,11 @@
 {
     "Brigada": {
         "Ogrim": {
-            "Dependencia": ["Isma"],
+            "Dependencia":[ [1,["Isma"]] ],
             "Incapacidad": ["Mineria"]
         },
         "Isma": {
-            "Dependencia": ["Ogrim" ],
+            "Dependencia": [[1,["Ogrim" ]]],
             "Incapacidad": ["Mineria"]
         }
         ,
@@ -26,7 +26,7 @@
             "Incapacidad": ["Mantenimiento","Exploracion","Recoleccion","Guardia","Combate","Relaciones"]
         },
         "Cornifer":{
-            "Dependencia": [],
+            "Dependencia": [[0,[ "Hornet", "Doliente Gris", "Hegemol", "Isma", "Ogrim"]]],
             "Incapacidad": ["Combate","Guardia","Relaciones"]
         },
         "Hornet": {
@@ -34,11 +34,11 @@
             "Incapacidad": ["Mineria","Mantenimiento","Construccion"]
         },
         "Hollow Knight": {
-            "Dependencia": [],
+            "Dependencia": [[0,["Hornet", "Rey Palido"]]],
             "Incapacidad": ["Mineria","Mantenimiento","Construccion"]
         },
         "Rey Palido":{
-            "Dependencia": [],
+            "Dependencia": [[0,[ "Hornet", "Doliente Gris", "Hegemol", "Isma", "Ogrim", "Hollow Knight"]]],
             "Incapacidad": ["Mantenimiento","Exploracion","Recoleccion","Guardia","Mineria","Construccion"]
         }
     },
