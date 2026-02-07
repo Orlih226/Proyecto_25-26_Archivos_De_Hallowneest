@@ -84,7 +84,7 @@ class SegundaVentana:
         self.Label6b = tk.CTkLabel(self.interfaz2,height=2,width=13,text="Seleccione el\nDia deseado"); self.Label6b.place( in_=self.interfaz2,x=770,y=30)
 
         self.botonAyuda = tk.CTkButton(self.interfaz2,height=40,width=40,text="?",bg_color="transparent",command=self.Hint);self.botonAyuda.place(x=530,y=35)
-        self.text1FI = tk.CTkTextbox(self.interfaz2,width=75,height=23,text_color="red"); self.text1FI.place(x=220,y= 70)
+        self.text1FI = tk.CTkTextbox(self.interfaz2,width=75,height=23); self.text1FI.place(x=220,y= 70)
         self.text2FF = tk.CTkTextbox(self.interfaz2,width=75,height=23,); self.text2FF.place(x=320,y= 70)
         self.text3A = tk.CTkTextbox(self.interfaz2,width=75,height=23,); self.text3A.place(x=420,y= 70)
         self.text4M = tk.CTkTextbox(self.interfaz2,width=130,height=50,); self.text4M.place(x=600,y= 70)
@@ -115,7 +115,7 @@ class SegundaVentana:
         self.opcion2 = tk.CTkCheckBox(self.framePersonajes,font=self.FuenteBase, width=40, height=20, text="Isma"); self.opcion2.place(x=30,y=110)
         self.opcion3 = tk.CTkCheckBox(self.framePersonajes,font=self.FuenteBase, width=40, height=20, text="Doliente Gris"); self.opcion3.place(x=30,y=155)
         self.opcion4 = tk.CTkCheckBox(self.framePersonajes, font=self.FuenteBase,width=40, height=20, text="Hegemol"); self.opcion4.place(x=30,y=200)
-        self.opcion5 = tk.CTkCheckBox(self.framePersonajes,font=self.FuenteBase, width=40, height=20, text="Hornet",border_color=None ); self.opcion5.place(x=30,y=245)
+        self.opcion5 = tk.CTkCheckBox(self.framePersonajes,font=self.FuenteBase, width=40, height=20, text="Hornet"); self.opcion5.place(x=30,y=245)
         self.opcion6 = tk.CTkCheckBox(self.framePersonajes,font=self.FuenteBase, width=40, height=20, text="Cornifer"); self.opcion6.place(x=270,y=65)
         self.opcion7 = tk.CTkCheckBox(self.framePersonajes,font=self.FuenteBase, width=40, height=20, text="Brigada de Construccion"); self.opcion7.place(x=270,y=110)
         self.opcion8 = tk.CTkCheckBox(self.framePersonajes,font=self.FuenteBase, width=40, height=20, text="Brigada de Mineria"); self.opcion8.place(x=270,y=155)
@@ -125,9 +125,9 @@ class SegundaVentana:
         self.opcion1.configure(command=lambda:self.Botones(self.opcion1,self.recursos))
         self.opcion2.configure(command=lambda:self.Botones(self.opcion2,self.recursos))
         self.opcion3.configure(command=lambda:self.Botones(self.opcion3,self.recursos))
-        self.opcion4.configure(command=lambda:self.Botones(self.opcion5,self.recursos))
-        self.opcion5.configure(command=lambda:self.Botones(self.opcion6,self.recursos))
-        self.opcion6.configure(command=lambda:self.Botones(self.opcion7,self.recursos))
+        self.opcion4.configure(command=lambda:self.Botones(self.opcion4,self.recursos))
+        self.opcion5.configure(command=lambda:self.Botones(self.opcion5,self.recursos))
+        self.opcion6.configure(command=lambda:self.Botones(self.opcion6,self.recursos))
         self.opcion7.configure(command=lambda:self.Botones(self.opcion7,self.recursos))
         self.opcion8.configure(command=lambda:self.Botones(self.opcion8,self.recursos))
         self.opcion9.configure(command=lambda:self.Botones(self.opcion9,self.recursos))
@@ -238,6 +238,7 @@ class SegundaVentana:
            return "break"
       
      def actualizar_dict(self,x,eventos):
+         print(x)
          if str(x[4]) in eventos["Eventos en ejecucion"]:
                 if str(x[3]) in eventos["Eventos en ejecucion"][str(x[4])]:
                    if x not in eventos["Eventos en ejecucion"][str(x[4])][str(x[3])]:
@@ -322,7 +323,7 @@ class SegundaVentana:
             pass 
 
      def borrar_dia(self):
-       evento = self.seleccion
+       evento =copy.deepcopy(self.seleccion)
        if evento!=[]:
         self.eliminados=[]
         year = str(evento[4])
@@ -357,44 +358,79 @@ class SegundaVentana:
              self.root.destroy()   
 
      def Hint(self,event=None):
-           ventana = tk.CTk();ventana.minsize(630,630)
-           frame = tk.CTkFrame(ventana,width=600,height=600)
+           ventana = tk.CTk();ventana.minsize(height=400,width=1200);ventana.maxsize(width=1200,height=600)
+           frame = tk.CTkFrame(ventana)
            fuente = tk.CTkFont(family="Bold",size=19)
-           mensaje = tk.CTkLabel(frame,font=fuente,text="La entrada de las horas es en hora militar\n si no desea usarla de este modo, toque el checbox a la izquierda.\nLos meses son uno debajo del otro y los dias son continuos por comas\nsi escribio un dia incorrecto, se le dira\n El prgrama solo leera los datos corrctos, los otros los desechara")
-           mensaje.pack()
-           frame.place(x=10,y=10)
+           texto= "Consejos para la creacion de eventos:\n1- Los meses deben introducirse uno debajo del otro separado por lineas\n2- Los dias deben estar separados por coma" \
+           "\n4- Al tener multiples lineas tanto de dias como de meses, se hara la correspondencia de la n linea del mes, con la n linea del dia " \
+           "\n5- Si hay mas lineas de mes que de dias, entonces a todos los meses en que se acabe la correspondencia anterior, se le asignara la ultima linea de dias" \
+           "\n6- Si hay mas lineas de dias que de mes, entonces a el ultimo mes se le otorgan toda las lineas de dias que vienen despues de que acabe la correspondencia" \
+           "\n7- Si introduce espacios en las lineas, se considerara invalido" \
+           "\n8- Si introduce letras en las lineas, se considerara invalido" \
+           "\n9- Hay ciertos errores que el programa depura automaticamente, esto ocurre siempre que al menos haya algun evento valido, se seguira marcando errores" \
+           "\n10- La hora se recibe en formato 24h, intente no poner espacios" \
+           "\n11- No puede ocupar ni 00:00, ni 24:00, por convencion" \
+           "\n12- Solo puede tener un tipo a la vez" \
+           "\n13- Solo puede ser un lugar a la vez" \
+           "\nEntre los objetos existen restricciones, aqui les dejo una lista basica:" \
+           "\n|Lugares          |     Capacidad" \
+           "\n|Cruces Olvidados | Hornet ,Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Ogrim, Isma, Rey Palido, Hollow Knight "
+           
+           mensaje = tk.CTkTextbox(frame,font=fuente)
+           mensaje.bind("<Key>",self.bloquear_Escritura)
+           mensaje.insert("1.0",texto)
+           mensaje.place(x=0,y=0,relheight=1,relwidth=1)
+           frame.place(x=0,y=0,relheight=1,relwidth=1)
            ventana.mainloop()
 
      #/////////////// Creacion de Eventos //////////////////////
      def crear_eventos(self):
+   
         self.errores = []
         eventos = self.Hora()
-        self.mostrar_errores()
+        print(eventos)
+      #  eventos = events[:]
+        try:
+         self.mostrar_errores()
+        except:
+            pass
+            
         self.elementos_producidos = []
         ejecucion=copy.deepcopy(self.jsonEcj)
+      
         if type(eventos)==list:
+
       
           self.elementos_producidos =  RequisitosDeEventos.Entrada(eventos,ejecucion)
-          eventosOcurriendo =self.elementos_producidos[1]
+        #  print(self.elementos_producidos[0])
           if len(self.elementos_producidos[0][1])>0:
              self.LevantarTercera(self.elementos_producidos[0])
              self.hacer_Grafico_Pastel(len(self.elementos_producidos[0][0]),len(self.elementos_producidos[0][1]))
           else:
+        
             for x in self.elementos_producidos[0][0]:
              self.actualizar_dict(x,ejecucion)
             self.jsonEcj.update(ejecucion) 
+          
+        #    print( self.jsonEcj)
             self.confirmacion.place(x=420,y=320)#;self.confirmacion.place_forget()
      
      def ExtraerDatos(self,textblock:tk.CTkTextbox):
         lista=[]
         contenido = textblock.get("1.0",tk.END)
-        linea = contenido.splitlines()
+        linea = contenido.splitlines() 
         for x in linea:
-           b = x.split(",")
+           b:list[str] = x.split(",")
            lista1 =[]
            for j in b:
               if j.isdigit() and int(j)>=0 :
                  lista1.append(int(j))
+              if not j.isdigit() and textblock ==self.text4M:
+                 self.errores.append(f"El supuesto mes {j} es incorrecto, el codigo ignorara este valor") 
+              elif not j.isdigit() and textblock ==self.text5D:
+                 self.errores.append(f"El supuesto dia {j} es incorrecto, el codigo ignorara este valor") 
+
+                 
            lista = lista + [lista1]
         return lista   
                
@@ -423,16 +459,32 @@ class SegundaVentana:
       return mes    
 
      def Fecha(self):      
-        dias = self.Dias()
-        meses = self.Meses()
-        year = self.Year()
+        try:
+         dias = self.Dias()
+        except:
+            self.menu_errores.set("Presencia de errores") 
+            self.menu_errores.configure(fg_color="red")
+            self.errores.append("El dia establecido es incorrecto")
+            
+        try:
+         meses = self.Meses()
+        except:
+            self.menu_errores.set("Presencia de errores") 
+            self.menu_errores.configure(fg_color="red")
+            self.errores.append("El mes establecido es incorrecto")   ;print(1)    
+        try: 
+         year = self.Year()
+        except:
+             self.menu_errores.set("Presencia de errores") 
+             self.menu_errores.configure(fg_color="red")
+             self.errores.append("El año establecido es incorrecto")   
         if dias==[[]] or len(dias)==0 or meses==[[]] or len(meses)==0 or year == 0:
             if dias==[[]] or len(dias)==0:
                  self.errores.append("El dia establecido es incorrecto")
             if  year == None or year ==0: 
                  self.errores.append("El año establecido es incorrecto")   
             if  meses == None or meses ==0: 
-                 self.errores.append("El mes establecido es incorrecto")        
+                 self.errores.append("El mes establecido es incorrecto")   ;print(2)       
         else:
            fechas = []
            if len(dias)==len(meses):
@@ -461,7 +513,7 @@ class SegundaVentana:
                if len(meses[y])>0:   
                   j = [fechas[len(fechas)-1][0],meses[y][0],year]
                   fechas.append(j)
-               else:  self.errores.append(f"El mes es incorrecto")  
+               else:  self.errores.append(f"El mes es incorrecto");print(3)  
            b=self.ValidarFecha(fechas)   
            return b  
 
@@ -490,7 +542,7 @@ class SegundaVentana:
      def Recursos(self):
       eventos:list = self.Places()
       if type(eventos)==list:
-        lista = self.recursos
+        lista = self.recursos[:]
         recursosP = self.inventario["Brigada"]
         recursosL = self.inventario["Lugares"]
         condicion = True
@@ -505,20 +557,20 @@ class SegundaVentana:
            for z in lista:
               if z not in recursosL[x[4]]:  
                  condicion = False
-                 self.errores.append(f"El evento es invalido, {y} no puede estar en {x[4]}")
+                 self.errores.append(f"El evento es invalido, {z} no puede estar en {x[4]}")
                  break  
            if condicion:
              for x in eventos:
                 x.append(lista)
 
-           for x in self.recursos:
+           for x in lista:
                inv = recursosP[x]["Dependencia"]
                if inv ==[]:
                   pass
                elif inv[0][0]==1:
                   flag = True
                   for y in inv[0][1]:
-                     if y not in self.recursos:
+                     if y not in lista:
                         flag = False
                         break
                   if flag == False:
@@ -527,7 +579,7 @@ class SegundaVentana:
                elif inv[0][0]==0:     
                     listaR =[]
                     for y in inv[0][1]:
-                       if y in self.recursos:
+                       if y in lista:
                           listaR.append(True)     
                     if True not in listaR:
                        break
@@ -541,12 +593,13 @@ class SegundaVentana:
             self.errores.append("Introduzca un personaje")  
                      
      def Places(self):
-        if len(self.lugares)==0 or len(self.lugares) >1:
-           if len(self.lugares)==0:
+        lugares = self.lugares[:]
+        if len(lugares)==0 or len(lugares) >1:
+           if len(lugares)==0:
              self.errores.append("Introduzca un lugar")
-           elif len(self.lugares)>1:
+           elif len(lugares)>1:
                self.errores.append("No pueden ser dos lugares a la vez ..") 
-        elif len(self.lugares)==1:
+        elif len(lugares)==1:
            b = self.TipoEvento()
            
            if type(b)==list:
@@ -555,17 +608,25 @@ class SegundaVentana:
               return b
                             
      def TipoEvento(self):  
-         if len(self.tipo)==0 or len(self.tipo) >1:
-           if len(self.tipo)==0:
+         tipo = self.tipo[:]
+         if len(tipo)==0 or len(tipo) >1:
+           if len(tipo)==0:
              self.errores.append("Introduzca un tipo")
-           elif len(self.tipo)>1:
+           elif len(tipo)>1:
                self.errores.append("No pueden ser dos tipos a la vez ..")  
-         elif len(self.tipo)==1:
-               b=self.Fecha()
+         elif len(tipo)==1:
+               b=None
+               try:
+                b=self.Fecha()
+               except:
+                  self.errores.append("Ha cometido un error en el momento de introducir los datos, revise si hay espacios, entre lineas")
+
                if type(b)==list:
                 for x in b:
-                  x.append(self.tipo[0])
+                  x.append(tipo[0])
                 return b
+               elif b ==None:
+                  pass
                
      def Hora(self): 
         horaI = self.text1FI.get("1.0","1.end")
@@ -608,15 +669,32 @@ class SegundaVentana:
                     else:
                      self.errores.append("Introduzca un nombre valido")
                 else: self.errores.append("Error en la hora")
+             else:
+               self.errores.append("La hora final no puede ser menor que la inicial")
         else:
           if b == 0:
               self.errores.append("Rellene el espacio hora final")
           elif b>6:
-              self.errores.append("La hora final es invalida")       
+              self.errores.append("La hora final es invalida")     
+
           if c == 0:
               self.errores.append("Rellene el espacio hora inicial")    
           elif c>6:
               self.errores.append("La hora inicial es invalida")  
+          try:
+             horaI= datetime.datetime.strptime(horaI,"%H:%M")
+             horaI= datetime.datetime.strftime(horaI,"%H:%M")
+          except: 
+              self.errores.append("Error en la hora inicial, recuerde es formato 00:00 a 24:00")
+          try:
+                horaF= datetime.datetime.strptime(horaF,"%H:%M")
+                horaF= datetime.datetime.strftime(horaF,"%H:%M")
+          except:
+              self.errores.append("Error en la hora final, recuerde es formato 00:00 a 24:00")
+
+
+                
+                 
        #   self.errores.append("Formato de fecha invalido, recuerde es formato 00:00 a 24:00")  
 
      def Botones(self,boton:tk.CTkCheckBox,lista):
