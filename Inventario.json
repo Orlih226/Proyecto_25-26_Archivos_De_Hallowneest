@@ -23,7 +23,7 @@
         },
         "Brigada de Mineria": {
             "Dependencia": [],
-            "Incapacidad": ["Mantenimiento","Exploracion","Recoleccion","Guardia","Combate","Relaciones"]
+            "Incapacidad": ["Exploracion","Recoleccion","Guardia","Combate","Relaciones"]
         },
         "Cornifer":{
             "Dependencia": [[0,[ "Hornet", "Doliente Gris", "Hegemol", "Isma", "Ogrim"]]],
@@ -131,7 +131,8 @@
             "Ogrim",
             "Isma",
             "Doliente Gris",
-            "Rey Palido"
+            "Rey Palido",
+            "Cornifer"
         ]
     }
 }

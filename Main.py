@@ -83,7 +83,7 @@ class SegundaVentana:
         self.Label4b = tk.CTkLabel(self.interfaz2,height=2,width=13,text="Seleccione el\n Mes deseado"); self.Label4b.place( in_=self.interfaz2,x=625,y=30)
         self.Label6b = tk.CTkLabel(self.interfaz2,height=2,width=13,text="Seleccione el\nDia deseado"); self.Label6b.place( in_=self.interfaz2,x=770,y=30)
 
-        self.botonAyuda = tk.CTkButton(self.interfaz2,height=40,width=40,text="?",bg_color="transparent",command=self.Hint);self.botonAyuda.place(x=530,y=35)
+        self.botonAyuda = tk.CTkButton(self.interfaz2,height=40,width=40,text="Ayuda Y RESTRICCIONES",bg_color="transparent",command=self.Hint);self.botonAyuda.place(x=30,y=35)
         self.text1FI = tk.CTkTextbox(self.interfaz2,width=75,height=23); self.text1FI.place(x=220,y= 70)
         self.text2FF = tk.CTkTextbox(self.interfaz2,width=75,height=23,); self.text2FF.place(x=320,y= 70)
         self.text3A = tk.CTkTextbox(self.interfaz2,width=75,height=23,); self.text3A.place(x=420,y= 70)
@@ -372,10 +372,37 @@ class SegundaVentana:
            "\n11- No puede ocupar ni 00:00, ni 24:00, por convencion" \
            "\n12- Solo puede tener un tipo a la vez" \
            "\n13- Solo puede ser un lugar a la vez" \
-           "\nEntre los objetos existen restricciones, aqui les dejo una lista basica:" \
-           "\n|Lugares          |     Capacidad" \
-           "\n|Cruces Olvidados | Hornet ,Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Ogrim, Isma, Rey Palido, Hollow Knight "
-           
+           "\n\nEntre los objetos existen restricciones, aqui les dejo una lista basica:" \
+           "\n|Lugares             |    Capacidad" \
+           "\n|Cruces Olvidados    |Hornet, Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Ogrim, Isma, Rey Palido, Hollow Knight" \
+           "\n|BocaSucia           |Hornet, Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Ogrim, Isma, Rey Palido" \
+           "\n|Sendero Verde       |Hornet, Ogrim, Isma, Cornifer, Doliente Gris, Rey Palido" \
+           "\n|Ciudad de Lagrimas  |Hornet, Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Rey Palido, Hollow Knight" \
+           "\n|Jardines de la Reina|Hornet, Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Ogrim, Isma, Rey Palido, Hollow Knight" \
+           "\n|Nido Profundo       |Hornet, Rey Palido" \
+           "\n|Paramos Fungicos    |Hornet, Rey Palido, Ogrim, Isma, Cornifer" \
+           "\n|La Colmena          |Hornet, Rey Palido" \
+           "\n|Canales Reales      |Ogrim, Isma, Cornifer" \
+           "\n|Tierras de reposo   |Hornet, Rey Palido, Doliente Gris, Hollow Knight, Cornifer" \
+           "\n|Cumbre de Cristal   |Hornet, Rey Palido, Cornifer, Brigada de Mineria" \
+           "\n|Palacio Blanco      |Hornet, Hegemol, Cornifer, Doliente Gris, Ogrim, Isma, Rey Palido, Hollow Knight" \
+           "\n\nEntre los personajes existen sinergias, asuma las que no aparezcan como sin sinergia:(1:AND,2:OR)" \
+           "\n1-Isma: 1: Ogrim" \
+           "\n2-Ogrim: 1: Isma" \
+           "\n3-Cornifer: 0: Hornet, Doliente Gris, Hegemol, Isma, Ogrim" \
+           "\n4-Hollow Knight: 0: Hornet, Rey Palido" \
+           "\n5-Rey Palido: 0: Hornet, Doliente Gris, Hegemol, Isma, Ogrim, Hollow Knight" \
+           "\n\nLos personajes tambien tiene  incapacidades:" \
+           "\n1-Ogrim: Mineria" \
+           "\n2-Isma: Mineria" \
+           "\n3-Hegemol: Mantenimiento, Exploracion, Mineria, Recoleccion" \
+           "\n4-Doliente Gris: Mantenimiento, Mineria, Construccion" \
+           "\n5-Brigada de Construccion: Mineria, Recoleccion, Exploracion, Guardia, Combate, Relaciones" \
+           "\n6-Brigada de Mineria: Recoleccion, Exploracion, Guardia, Combate, Relaciones" \
+           "\n7-Cornifer: Combate, Guardia , Relaciones" \
+           "\n8-Hornet: Mineria, Mantenimiento, Construccion" \
+           "\n9-Hollow Knight: Mineria, Mantenimiento, Construccion" \
+           "\n10-Rey Palido: Mantenimiento, Exploracion, Recoleccion, Guardia, Mineria, Construccion"            
            mensaje = tk.CTkTextbox(frame,font=fuente)
            mensaje.bind("<Key>",self.bloquear_Escritura)
            mensaje.insert("1.0",texto)
@@ -388,32 +415,27 @@ class SegundaVentana:
    
         self.errores = []
         eventos = self.Hora()
-        print(eventos)
-      #  eventos = events[:]
         try:
          self.mostrar_errores()
         except:
             pass
-            
         self.elementos_producidos = []
         ejecucion=copy.deepcopy(self.jsonEcj)
-      
         if type(eventos)==list:
-
-      
           self.elementos_producidos =  RequisitosDeEventos.Entrada(eventos,ejecucion)
-        #  print(self.elementos_producidos[0])
-          if len(self.elementos_producidos[0][1])>0:
+          errores = self.errores[:]
+          if len(errores)==0:
+           if len(self.elementos_producidos[0][1])>0:
              self.LevantarTercera(self.elementos_producidos[0])
              self.hacer_Grafico_Pastel(len(self.elementos_producidos[0][0]),len(self.elementos_producidos[0][1]))
-          else:
+           else:
         
             for x in self.elementos_producidos[0][0]:
              self.actualizar_dict(x,ejecucion)
             self.jsonEcj.update(ejecucion) 
-          
-        #    print( self.jsonEcj)
-            self.confirmacion.place(x=420,y=320)#;self.confirmacion.place_forget()
+            self.confirmacion.place(x=420,y=320)
+          else: 
+             pass
      
      def ExtraerDatos(self,textblock:tk.CTkTextbox):
         lista=[]
@@ -460,7 +482,7 @@ class SegundaVentana:
 
      def Fecha(self):      
         try:
-         dias = self.Dias()
+         dias = self.Dias()[:]
         except:
             self.menu_errores.set("Presencia de errores") 
             self.menu_errores.configure(fg_color="red")
@@ -471,14 +493,14 @@ class SegundaVentana:
         except:
             self.menu_errores.set("Presencia de errores") 
             self.menu_errores.configure(fg_color="red")
-            self.errores.append("El mes establecido es incorrecto")   ;print(1)    
+            self.errores.append("El mes establecido es incorrecto")   
         try: 
          year = self.Year()
         except:
              self.menu_errores.set("Presencia de errores") 
              self.menu_errores.configure(fg_color="red")
-             self.errores.append("El año establecido es incorrecto")   
-        if dias==[[]] or len(dias)==0 or meses==[[]] or len(meses)==0 or year == 0:
+             self.errores.append("El año establecido es incorrecto")       
+        if dias==[[]] or dias == [] or len(dias)==0 or meses==[[]] or meses==[]or len(meses)==0 or year == 0:
             if dias==[[]] or len(dias)==0:
                  self.errores.append("El dia establecido es incorrecto")
             if  year == None or year ==0: 
@@ -513,9 +535,17 @@ class SegundaVentana:
                if len(meses[y])>0:   
                   j = [fechas[len(fechas)-1][0],meses[y][0],year]
                   fechas.append(j)
-               else:  self.errores.append(f"El mes es incorrecto");print(3)  
+               else:  self.errores.append(f"El mes es incorrecto")
            b=self.ValidarFecha(fechas)   
-           return b  
+           for x in b:
+            if x[0]==[] or x[1]==[]or x[1]==None or x[2]==None:
+              if x[0]==[]:
+                  self.errores.append(f"El dia establecido es incorrecto")
+              if x[1]== None or x[1]==None:
+                  self.errores.append(f"El mes establecido incorrecto")        
+                 
+           else:   
+            return b  
 
      def ValidarFecha(self,fecha:list):  
        try:
@@ -527,6 +557,8 @@ class SegundaVentana:
            for y in range(len(fecha[x][0])):
               if fecha[x][0][y] <= diasM:
                  b.append(fecha[x][0][y])
+              if fecha[x][0][y] > diasM:
+                 self.errores.append(f"El dia {fecha[x][0][y]} es mayor que el limite del mes")
            f[x][0]=b  
         return f     
        except:
