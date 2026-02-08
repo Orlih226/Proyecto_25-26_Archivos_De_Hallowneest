@@ -1,6 +1,6 @@
 # Archivos de Hallowneest: Organizador de Eventos
 ## Descripcion
-Aplicacion desarrollada en python con una interfaz grafica desarrollada en tkinter para una gestion de eventos. Este proyecto permite crear, revisar eventos en el tiempo y buscar el tiempo mas eficiente para un evento
+Aplicacion desarrollada en python con una interfaz grafica desarrollada en tkinter para una gestion de eventos. Este proyecto permite crear, revisar eventos en el tiempo y buscar el tiempo más eficiente para un evento
 
 ## Dominio:
 El dominio se basa en la gestion administrativa de un Reino que se recupera de una crisis. Este dominio fue escogido debido a la amplia posibilidad de creacion de eventos, pudiendo planificar guardias, construcciones y visitas sociales por parte de los funcionarios del Reino. Brindando un acercamiento a la idea de organizacion de recursos a nivel institucional
@@ -21,10 +21,10 @@ El dominio se basa en la gestion administrativa de un Reino que se recupera de u
 ## Estructura
 - EventosEjec.json : Base de datos de eventos activa, cualquier base de datos que se cargue, debe cumplir los requerimientos en requisitos
 - Inventario.json : Base de datos de inventario activa, esta base de datos no debe cambiarse
-- Main.py : Contiene el grueso del proyecto. Constituye la interfaz visual, y las funcionalidades de los botones. El proyecto se inicia aqui
+- Main.py : Contiene el grueso del proyecto. Constituye la interfaz visual, y las funcionalidades de los botones. El proyecto se inicia aquí
 - TrabajoConDateTime.py : Contiene una clase con diferentes funciones, su funcion es la validacion de fechas y devolucion de formatos fecha
 - TrabajoConJson.py : Contiene una clase para extraer y escribir en la base de datos
-- Trabajar.py : Segunda archivo mas importante del proyecto, contiene la logica de colision de eventos, esta se divide en revisar si el evento puede ocurrir sin colision de eventos, si no es posible devolverle al usuario que eventos no lo permitieron y buscar un hueco donde el evento pueda ocurrir
+- Trabajar.py : Segunda archivo más importante del proyecto, contiene la logica de colision de eventos, esta se divide en revisar si el evento puede ocurrir sin colision de eventos, si no es posible devolverle al usuario que eventos no lo permitieron y buscar un hueco donde el evento pueda ocurrir
 
 ## Dependencias
 - Python 3.8 o mayor

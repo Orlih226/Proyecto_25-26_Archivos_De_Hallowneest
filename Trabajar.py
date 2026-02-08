@@ -23,19 +23,18 @@ class RequisitosDeEventos:
                elif type(condicion[0])==tuple:
                    invalidos.append([model,condicion[0][1]]) 
                    p.append(x)
-      
+    
       lista = invalidos[:]  
       validados = []          
       if len(lista)>0:
-         for x in lista:
-            b= RequisitosDeEventos.Validar(x,condicion[1])  
-            if type(b) == list:
+         for x in range(len(lista)):
+             b= RequisitosDeEventos.Validar(lista[x],condicion[1])  
+             if type(b) == list:
                 validados.append(b[0]) 
       return(validos,p,validados),json
    
    def Validar(eventos_inv:list,json:dict):
       evento = eventos_inv[0]
-    #  print(json)
       if type(eventos_inv)==list:
          b= eventos_inv[:]
        
@@ -148,10 +147,8 @@ class RequisitosDeEventos:
                                  return (False,y)
                            a3 = x[7];a4 = y[7]
                            if a3>=a4:
-                           #      print(1)
                                  for i in a4:
                                       if i in a3:
-                               #         print(a3,a4)
                                         return (False,y)
                                       else: continue
                            elif  a3<a4:
@@ -161,9 +158,9 @@ class RequisitosDeEventos:
                                     else: continue                                  
 
 
-#json ={'Eventos en ejecucion': {'2025': {'1': [['asdda', '12:00 a 13:00', 1, 1, 2025, 'Construccion', 'Cruces Olvidados', ['Brigada de Construccion']],['asdda', '12:00 a 13:00', 1, 1, 2025, 'Construccion', 'Ciudad de Lagrimas', ['Doliente Gris']]]}}}
-#evento=[['asdda', '12:00 a 13:00', [1], 1, 2025, 'Construccion', 'Sendero Verde', ['Ogrim', "Isma"]]] 
+
+#json ={'Eventos en ejecucion': {'2025': {'1': [['asdda', '12:00 a 13:00', 1, 1, 2025, 'Construccion', 'Cruces Olvidados', ['Brigada de Construccion']],['asdda', '13:00 a 14:00', 1, 1, 2025, 'Construccion', 'Ciudad de Lagrimas', ['Doliente Gris']]]}}}
+#evento=[['asdda', '12:00 a 14:00', [1], 1, 2025, 'Construccion', 'Sendero Verde', ["Doliente Gris"]]] 
 #b=RequisitosDeEventos.Entrada(evento,json)
-#print(b[1])
 #evento1 =[['asdda', '12:00 a 13:00', [1], 1, 2025, 'Exploracion', 'Ciudad de Lagrimas', ["Doliente Gris"]]] 
 #c = RequisitosDeEventos.Entrada(evento1,b[1])

@@ -30,8 +30,8 @@ class SegundaVentana:
         self.label3 = tk.CTkLabel(self.interfaz1, text="Seleccione un fecha:",bg_color="transparent")
         self.frameCal = tk.CTkFrame(self.frameM,width=320,height=320)
         self.cal = Calendar(self.frameCal, selectmode='day', year=2025, month=10, day=13)
-        self.label2 = tk.CTkLabel(self.interfaz1, text="Aqui tienes los eventos del dia")
-        self.label1 = tk.CTkLabel(self.interfaz1, text=" Aqui estan los detalles de evento",font=tk.CTkFont(family="bold",size=20))
+        self.label2 = tk.CTkLabel(self.interfaz1, text="Aquí tienes los eventos del dia")
+        self.label1 = tk.CTkLabel(self.interfaz1, text="Aquí estan los detalles de evento",font=tk.CTkFont(family="bold",size=20))
         self.boton1 = tk.CTkButton(self.frameM,text="Crear evento",command=self.Crear)
         self.boton2 = tk.CTkButton(self.frameM,text="Salir",command=self.salir)
         self.com = tk.CTkOptionMenu(self.interfaz1,width=120,height=20,values=self.eventosOcurriendo,command=self.HallarPosicion)
@@ -183,17 +183,17 @@ class SegundaVentana:
       
         frame1Tercera = tk.CTkFrame(self.interfaz3,width=1100,height=250);frame1Tercera.place(x=50, y=90) 
         frame2Tercera = tk.CTkFrame(self.interfaz3,width=1100,height=250);frame2Tercera.place(x=50, y=360) 
-        texto2 ="Los eventos aqui presentados pasaron sin ningun problema:"
+        texto2 ="Los eventos aquí presentados pasaron sin ningun problema:"
         label1Tercera = tk.CTkLabel(frame1Tercera,text=texto2,font=fuente);label1Tercera.place(x=10,y=0)
         self.cajaTexto1Tercera = tk.CTkTextbox(frame1Tercera,width=610,height=240,fg_color="gray22");self.cajaTexto1Tercera.place(x=480,y=5)
         self.cajaTexto1Tercera.bind("<Key>",self.bloquear_Escritura)
 
-        texto2 ="Los eventos aqui presentados no pasaron:"
+        texto2 ="Los eventos aquí presentados no pasaron:"
         label2Tercera = tk.CTkLabel(frame2Tercera,text=texto2,font=fuente);label2Tercera.place(x=10,y=0)
         self.cajaTexto2Tercera = tk.CTkTextbox(frame2Tercera,width=500,height=220,fg_color="gray22");self.cajaTexto2Tercera.place(x=10,y=25)
         self.cajaTexto2Tercera.bind("<Key>",self.bloquear_Escritura)
 
-        texto2 ="Los eventos aqui presentados son el reajuste de los aledanos:"
+        texto2 ="Los eventos aquí presentados son el reajuste de los aledaños:"
         label3Tercera = tk.CTkLabel(frame2Tercera,text=texto2,font=fuente);label3Tercera.place(x=600,y=0)
         self.cajaTexto3Tercera = tk.CTkTextbox(frame2Tercera,width=500,height=220,fg_color="gray22");self.cajaTexto3Tercera.place(x=590,y=25)
         self.cajaTexto3Tercera.bind("<Key>",self.bloquear_Escritura)
@@ -206,7 +206,7 @@ class SegundaVentana:
 
 
         fuente = tk.CTkFont(family="Bold",size=18) 
-        texto2 ="Los eventos aqui presentados son el reajuste de los aledanos:"
+        texto2 ="Los eventos aquí presentados son el reajuste de los aledaños:"
         label1Cuarta = tk.CTkLabel(frame1Cuarta,text=texto2,font=fuente);label1Cuarta.place(x=10,y=10)
         self.cajaTexto1Cuarta = tk.CTkTextbox(frame1Cuarta,width=500,height=585,fg_color="gray22");self.cajaTexto1Cuarta.place(x=10,y=50)
         self.cajaTexto1Cuarta.bind("<Key>",self.bloquear_Escritura)
@@ -238,7 +238,6 @@ class SegundaVentana:
            return "break"
       
      def actualizar_dict(self,x,eventos):
-         print(x)
          if str(x[4]) in eventos["Eventos en ejecucion"]:
                 if str(x[3]) in eventos["Eventos en ejecucion"][str(x[4])]:
                    if x not in eventos["Eventos en ejecucion"][str(x[4])][str(x[3])]:
@@ -289,7 +288,7 @@ class SegundaVentana:
            valores =self.eventosOcurriendo
        
            if len(valores)>0:
-             self.com.set("Aqui estan los eventos este dia") 
+             self.com.set("aquí estan los eventos este dia") 
              cont = 0
              for x in valores:
                 self.opciones.append(f"{cont}-{x[0]} {x[1]}")
@@ -361,48 +360,49 @@ class SegundaVentana:
            ventana = tk.CTk();ventana.minsize(height=400,width=1200);ventana.maxsize(width=1200,height=600)
            frame = tk.CTkFrame(ventana)
            fuente = tk.CTkFont(family="Bold",size=19)
-           texto= "Consejos para la creacion de eventos:\n1- Los meses deben introducirse uno debajo del otro separado por lineas\n2- Los dias deben estar separados por coma" \
-           "\n4- Al tener multiples lineas tanto de dias como de meses, se hara la correspondencia de la n linea del mes, con la n linea del dia " \
-           "\n5- Si hay mas lineas de mes que de dias, entonces a todos los meses en que se acabe la correspondencia anterior, se le asignara la ultima linea de dias" \
-           "\n6- Si hay mas lineas de dias que de mes, entonces a el ultimo mes se le otorgan toda las lineas de dias que vienen despues de que acabe la correspondencia" \
-           "\n7- Si introduce espacios en las lineas, se considerara invalido" \
-           "\n8- Si introduce letras en las lineas, se considerara invalido" \
-           "\n9- Hay ciertos errores que el programa depura automaticamente, esto ocurre siempre que al menos haya algun evento valido, se seguira marcando errores" \
+           texto= "Consejos para la creación de eventos:\n1- Los meses deben introducirse uno debajo del otro separado por líneas\n2- Los dias deben estar separados por coma"\
+           "\n5- Los meses y dias deben ser solo números"\
+           "\n4- Al tener múltiples líneas tanto de dias como de meses, se hara la correspondencia de la n línea del mes, con la n línea del día "\
+           "\n5- Si hay más líneas de mes que de dias, entonces a todos los meses en que se acabe la correspondencia anterior, se le asignara la última línea de dias" \
+           "\n6- Si hay más líneas de dias que de mes, entonces a el ultimo mes se le otorgan toda las líneas de dias que vienen después de que acabe la correspondencia" \
+           "\n7- Si introduce espacios en las líneas, se considerará inválido" \
+           "\n8- Si introduce letras en las líneas, se considerará inválido" \
+           "\n9- Hay ciertos errores que el programa depura automáticamente, esto ocurre siempre que al menos haya algún evento válido, se seguirá marcando errores" \
            "\n10- La hora se recibe en formato 24h, intente no poner espacios" \
-           "\n11- No puede ocupar ni 00:00, ni 24:00, por convencion" \
+           "\n11- No puede ocupar ni 00:00, ni 24:00, por convención" \
            "\n12- Solo puede tener un tipo a la vez" \
-           "\n13- Solo puede ser un lugar a la vez" \
-           "\n\nEntre los objetos existen restricciones, aqui les dejo una lista basica:" \
+           "\n13 Solo puede ser un lugar a la vez" \
+           "\n\nEntre los objetos existen restricciones, aquí les dejo una lista básica:" \
            "\n|Lugares             |    Capacidad" \
-           "\n|Cruces Olvidados    |Hornet, Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Ogrim, Isma, Rey Palido, Hollow Knight" \
-           "\n|BocaSucia           |Hornet, Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Ogrim, Isma, Rey Palido" \
-           "\n|Sendero Verde       |Hornet, Ogrim, Isma, Cornifer, Doliente Gris, Rey Palido" \
-           "\n|Ciudad de Lagrimas  |Hornet, Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Rey Palido, Hollow Knight" \
-           "\n|Jardines de la Reina|Hornet, Hegemol, Cornifer, Brigada de Construccion, Doliente Gris, Ogrim, Isma, Rey Palido, Hollow Knight" \
-           "\n|Nido Profundo       |Hornet, Rey Palido" \
-           "\n|Paramos Fungicos    |Hornet, Rey Palido, Ogrim, Isma, Cornifer" \
-           "\n|La Colmena          |Hornet, Rey Palido" \
+           "\n|Cruces Olvidados    |Hornet, Hegemol, Cornifer, Brigada de Construcción, Doliente Gris, Ogrim, Isma, Rey Pálido, Hollow Knight" \
+           "\n|BocaSucia           |Hornet, Hegemol, Cornifer, Brigada de Construcción, Doliente Gris, Ogrim, Isma, Rey Pálido" \
+           "\n|Sendero Verde       |Hornet, Ogrim, Isma, Cornifer, Doliente Gris, Rey Pálido" \
+           "\n|Ciudad de Lagrimas  |Hornet, Hegemol, Cornifer, Brigada de Construcción, Doliente Gris, Rey Pálido, Hollow Knight" \
+           "\n|Jardines de la Reina|Hornet, Hegemol, Cornifer, Brigada de Construcción, Doliente Gris, Ogrim, Isma, Rey Pálido, Hollow Knight" \
+           "\n|Nido Profundo       |Hornet, Rey Pálido" \
+           "\n|Paramos Fungicos    |Hornet, Rey Pálido, Ogrim, Isma, Cornifer" \
+           "\n|La Colmena          |Hornet, Rey Pálido" \
            "\n|Canales Reales      |Ogrim, Isma, Cornifer" \
-           "\n|Tierras de reposo   |Hornet, Rey Palido, Doliente Gris, Hollow Knight, Cornifer" \
-           "\n|Cumbre de Cristal   |Hornet, Rey Palido, Cornifer, Brigada de Mineria" \
-           "\n|Palacio Blanco      |Hornet, Hegemol, Cornifer, Doliente Gris, Ogrim, Isma, Rey Palido, Hollow Knight" \
+           "\n|Tierras de reposo   |Hornet, Rey Pálido, Doliente Gris, Hollow Knight, Cornifer" \
+           "\n|Cumbre de Cristal   |Hornet, Rey Pálido, Cornifer, Brigada de Minería" \
+           "\n|Palacio Blanco      |Hornet, Hegemol, Cornifer, Doliente Gris, Ogrim, Isma, Rey Pálido, Hollow Knight" \
            "\n\nEntre los personajes existen sinergias, asuma las que no aparezcan como sin sinergia:(1:AND,2:OR)" \
            "\n1-Isma: 1: Ogrim" \
            "\n2-Ogrim: 1: Isma" \
            "\n3-Cornifer: 0: Hornet, Doliente Gris, Hegemol, Isma, Ogrim" \
-           "\n4-Hollow Knight: 0: Hornet, Rey Palido" \
-           "\n5-Rey Palido: 0: Hornet, Doliente Gris, Hegemol, Isma, Ogrim, Hollow Knight" \
-           "\n\nLos personajes tambien tiene  incapacidades:" \
-           "\n1-Ogrim: Mineria" \
-           "\n2-Isma: Mineria" \
-           "\n3-Hegemol: Mantenimiento, Exploracion, Mineria, Recoleccion" \
-           "\n4-Doliente Gris: Mantenimiento, Mineria, Construccion" \
-           "\n5-Brigada de Construccion: Mineria, Recoleccion, Exploracion, Guardia, Combate, Relaciones" \
-           "\n6-Brigada de Mineria: Recoleccion, Exploracion, Guardia, Combate, Relaciones" \
+           "\n4-Hollow Knight: 0: Hornet, Rey Pálido" \
+           "\n5-Rey Pálido: 0: Hornet, Doliente Gris, Hegemol, Isma, Ogrim, Hollow Knight" \
+           "\n\nLos personajes también tiene  incapacidades:" \
+           "\n1-Ogrim: Minería" \
+           "\n2-Isma: Minería" \
+           "\n3-Hegemol: Mantenimiento, Exploracion, Minería, Recolección" \
+           "\n4-Doliente Gris: Mantenimiento, Minería, Construcción" \
+           "\n5-Brigada de Construccion: Minería, Recolección, Exploración, Guardia, Combate, Relaciones" \
+           "\n6-Brigada de Mineria: Recolección, Exploración, Guardia, Combate, Relaciones" \
            "\n7-Cornifer: Combate, Guardia , Relaciones" \
-           "\n8-Hornet: Mineria, Mantenimiento, Construccion" \
-           "\n9-Hollow Knight: Mineria, Mantenimiento, Construccion" \
-           "\n10-Rey Palido: Mantenimiento, Exploracion, Recoleccion, Guardia, Mineria, Construccion"            
+           "\n8-Hornet: Mineria, Mantenimiento, Construcción" \
+           "\n9-Hollow Knight: Minería, Mantenimiento, Construcción" \
+           "\n10-Rey Palido: Mantenimiento, Exploración, Recolección, Guardia, Minería, Construcción"            
            mensaje = tk.CTkTextbox(frame,font=fuente)
            mensaje.bind("<Key>",self.bloquear_Escritura)
            mensaje.insert("1.0",texto)
@@ -448,9 +448,9 @@ class SegundaVentana:
               if j.isdigit() and int(j)>=0 :
                  lista1.append(int(j))
               if not j.isdigit() and textblock ==self.text4M:
-                 self.errores.append(f"El supuesto mes {j} es incorrecto, el codigo ignorara este valor") 
+                 self.errores.append(f"El supuesto mes {j} es incorrecto, el código ignorara este valor") 
               elif not j.isdigit() and textblock ==self.text5D:
-                 self.errores.append(f"El supuesto dia {j} es incorrecto, el codigo ignorara este valor") 
+                 self.errores.append(f"El supuesto dia {j} es incorrecto, el código ignorara este valor") 
 
                  
            lista = lista + [lista1]
@@ -506,7 +506,7 @@ class SegundaVentana:
             if  year == None or year ==0: 
                  self.errores.append("El año establecido es incorrecto")   
             if  meses == None or meses ==0: 
-                 self.errores.append("El mes establecido es incorrecto")   ;print(2)       
+                 self.errores.append("El mes establecido es incorrecto")         
         else:
            fechas = []
            if len(dias)==len(meses):
@@ -651,7 +651,7 @@ class SegundaVentana:
                try:
                 b=self.Fecha()
                except:
-                  self.errores.append("Ha cometido un error en el momento de introducir los datos, revise si hay espacios, entre lineas")
+                  self.errores.append("Ha cometido un error en el momento de introducir los datos, revise si hay espacios, entre líneas")
 
                if type(b)==list:
                 for x in b:
@@ -795,7 +795,7 @@ class SegundaVentana:
 
      def usar_solo_validas(self):
        eventos = {}
-       lista = self.elementos_producidos[0][0]
+       lista = self.elementos_producidos[0][0][:]
        if type(self.jsonEcj) == dict:
           eventos =copy.deepcopy(self.jsonEcj)
           for x in lista:
@@ -855,7 +855,11 @@ class SegundaVentana:
           for x in listaL:
             self.actualizar_dict(x,eventos)  
           self.jsonEcj.update(eventos)   
-       #   self.usar_solo_validas()  
+          lista=self.elementos_producidos[0][0][:]
+          json = copy.deepcopy(self.jsonEcj)
+          for y in lista:
+           self.actualizar_dict(y,json)
+          self.jsonEcj.update(json)  
           self.negar_eventos_y_borrador()
                    
      def BusquedaBinaria4(self,num,izquierda,derecha,lista):

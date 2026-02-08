@@ -25,7 +25,7 @@ class ManejoDeTiempo:
      else: return True
     else: 
        return[hora_inicial_de_1i,hora_final_de_1i,hora_final_de_2i]
-    #La idea es que si me devuelve false, entonces las horas coinciden, sin importar que sean validas o no, eso lo valida la otra funcion 
+    #La idea es que si me devuelve false, entonces las horas coinciden, sin importar que sean validas o no, eso lo valida la otra función 
   
    def Dias(dia1, dia2):
       if dia1 == dia2:
@@ -38,4 +38,4 @@ class ManejoDeTiempo:
          return False     
       else: 
          return True   
-      #La funcion comparara si los dias y meses son iguales, si lo son devuelve True, sino Flase.
+      #La función comparara si los dias y meses son iguales, si lo son devuelve True, sino Flase.
