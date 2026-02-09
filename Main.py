@@ -38,6 +38,8 @@ class SegundaVentana:
         self.com.set("Eventos")
         self.text = tk.CTkTextbox(self.interfaz1,width=555,height=150,font=tk.CTkFont(family="bold",size=15),text_color="white")
         self.text.bind("<Key>",self.bloquear_Escritura)
+        self.text.bind("<Key>",self.bloquear_borrado)
+       
         self.boton3Primera =tk.CTkButton(self.interfaz1,text="Borrar evento",command=self.borrar_dia)
         self.boton4Primera =tk.CTkButton(self.interfaz1,text="Borrar todos los eventos del mes",command=self.borrar_mes)
         self.boton5Primera =tk.CTkButton(self.interfaz1,text="Borrar todos los eventos del año",command=self.borrar_ano)
@@ -187,16 +189,19 @@ class SegundaVentana:
         label1Tercera = tk.CTkLabel(frame1Tercera,text=texto2,font=fuente);label1Tercera.place(x=10,y=0)
         self.cajaTexto1Tercera = tk.CTkTextbox(frame1Tercera,width=610,height=240,fg_color="gray22");self.cajaTexto1Tercera.place(x=480,y=5)
         self.cajaTexto1Tercera.bind("<Key>",self.bloquear_Escritura)
+        self.cajaTexto1Tercera.bind("<Key>",self.bloquear_borrado)
 
         texto2 ="Los eventos aquí presentados no pasaron:"
         label2Tercera = tk.CTkLabel(frame2Tercera,text=texto2,font=fuente);label2Tercera.place(x=10,y=0)
-        self.cajaTexto2Tercera = tk.CTkTextbox(frame2Tercera,width=500,height=220,fg_color="gray22");self.cajaTexto2Tercera.place(x=10,y=25)
+        self.cajaTexto2Tercera = tk.CTkTextbox(frame2Tercera,width=500,height=220,fg_color="gray22",text_color="red");self.cajaTexto2Tercera.place(x=10,y=25)
         self.cajaTexto2Tercera.bind("<Key>",self.bloquear_Escritura)
+        self.cajaTexto2Tercera.bind("<Key>",self.bloquear_borrado)
 
         texto2 ="Los eventos aquí presentados son el reajuste de los aledaños:"
         label3Tercera = tk.CTkLabel(frame2Tercera,text=texto2,font=fuente);label3Tercera.place(x=600,y=0)
         self.cajaTexto3Tercera = tk.CTkTextbox(frame2Tercera,width=500,height=220,fg_color="gray22");self.cajaTexto3Tercera.place(x=590,y=25)
         self.cajaTexto3Tercera.bind("<Key>",self.bloquear_Escritura)
+        self.cajaTexto3Tercera.bind("<Key>",self.bloquear_borrado)
        
         self.canvas1Tercera = tk.CTkCanvas(frame1Tercera,width=550,height=260,bg="gray20");self.canvas1Tercera.place(x=15,y=35)
 
@@ -206,10 +211,11 @@ class SegundaVentana:
 
 
         fuente = tk.CTkFont(family="Bold",size=18) 
-        texto2 ="Los eventos aquí presentados son el reajuste de los aledaños:"
+        texto2 ="Los eventos aquí presentados son el reajuste:"
         label1Cuarta = tk.CTkLabel(frame1Cuarta,text=texto2,font=fuente);label1Cuarta.place(x=10,y=10)
         self.cajaTexto1Cuarta = tk.CTkTextbox(frame1Cuarta,width=500,height=585,fg_color="gray22");self.cajaTexto1Cuarta.place(x=10,y=50)
         self.cajaTexto1Cuarta.bind("<Key>",self.bloquear_Escritura)
+        self.cajaTexto1Cuarta.bind("<Key>",self.bloquear_borrado)
        
         fuente = tk.CTkFont(family="Bold",size=19) 
         texto2 ="Seleccione, escribiendo, el indice del evento que desea inscribir a la base\n de datos. Las entradas validas son numeros separados\n por comas o uno debajo del otro\nSi un numero no esta se ignora tambien incluye cualquier letra"
@@ -226,8 +232,11 @@ class SegundaVentana:
         self.interfaz3.place(x=0,y=0,relheight=1,relwidth=1) 
         self.interfaz4.place(x=0,y=0,relheight=1,relwidth=1)      
         self.interfaz1.lift()
-     #   self.LevantarTercera()
-      #  self.hacer_Grafico_Pastel()
+
+     def bloquear_borrado(self,event=None):
+         if event.keysym =="Delete" or event.keysym=="BackSpace":
+           return "break"
+      
 
      def cerrar(self,event=None):
         ExtraerJson.Escribir(json_nuevo=self.jsonEcj,archivo="EventosEjec.json"); self.root.destroy()
