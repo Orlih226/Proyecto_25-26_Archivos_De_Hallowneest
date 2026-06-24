@@ -72,8 +72,10 @@ Si hay más líneas de días que de meses, el programa hara la operacion base, y
 
 ## Experiencias:
 - Durante el desarrollo hubo sus altibajos, principalmente la perida de un de entre un 40 y un 50 % del codigo, dos veces, este se debio principalmente a que se realizaron pull en vez que push, y sincronizo los cambios antiguos que ya estaban en github con los nuevos, lo que elimino horas de desarrollo
-- Ademas debido al sistema de tkinter, no tenia ciertas comodidades a la hora de la belleza visual, por lo tanto tuve que reescribir el codigo, pasandolo de tkinter a customtkinter, y con este cambio, se vio en la necesidad de cambiar aproximadamente un 90% del proyecto,
+- Ademas debido al sistema de tkinter, no tenia ciertas comodidades a la hora de la belleza visual, por lo tanto tuve que reescribir el codigo, pasandolo de tkinter a customtkinter, y con este cambio, se vio en la necesidad de cambiar aproximadamente un 90% del proyecto
+- Al passar a customtkinter, se arrastraron problemas del propio tkinter, en ctk, no existe la transparencia, cuando declaro un boton transparente, lo que hace es heredar un color, cada boton debe pertenecer a un frame o grid, cuando declaro el color transparente, lo que hace es asumir el color de fondo del frame del que es hijo, por lo tanto a la hora de poner fotos de fondo, y ponerle iconos a los botones, generaban que una tarea sencilla se alargara mucho, o se imposibilitara, luego se opto por no usar fotos
 - Ademas hubo problemas serio a la hora de validar eventos, debido a que al usar listas de listas, estas se copiaban por referencia, y al cambiarla, se cambiaba el evento en la base de datos fantasma
+- A la hora de la revisión, el código poseía un sitema de filtrado, que los datos erróneos (Ejemplo: Introducir días [1,2,3,4,5,asdsajd ], el codigo solo usaba los validos) eran descartados, como el codigo tambien poseía una función diseñada para notificar de los errores al introducir datos, como el flujo del código era: Introducir datos, depurar, procesar, notificar; la mayoría de los errores no se notificaban, simplemente se usaban los válidos, llevó a un cambio profundo en el código, cambiando el flujo
 
 # Explicacion resumida del funcionamiento:
 - Cuando entras, se despliega un calendario que muestra los dias de un mes, y un año, si tocas algun dia, este accede a los valores de la base de datos que poseean esta coincidencia, y te muestra una lista con el nombre
@@ -85,7 +87,11 @@ Si hay más líneas de días que de meses, el programa hara la operacion base, y
 - Luego revisa si el año esta entre 2025 y 9999, y si es un año valido, osea un número
 - Luego revisa los meses, si la entrada es como lo describe el informe, lo acepta, si en una linea hay prescencia de comas, usara el primer elemento si es valido
 - Lo mismo ocurre con los días, excepto en la parte de las comas, recibira todos los validos, aunque anunciara el error
-- 
-
+- Si lo anterior es valido, pasa la revisipn de dependencias de recursos, revisando colisiones entre recursos y lugares
+- Si esto es valido, llama a la funcion Entrada, y le pasa los eventos creados y los de la base de datos, luego
+- Esta introduce los eventos que son posibles a la base de datos, los que no, los introduce en una lista, que luego los validara y los introducira en posiciones validas, en una base de datos fantasma
+- Aparecerá otra interfaz que revisa la intencion del usuario, si el usuario desea introducirr todos, no introducir ninguno, revisar su entrada o seleccionar cuales introducir
+- Cada uno tendrá una interfaz para esas acciones
+- El progreso se guarda al cambiar de una pestaña a otra
 
 
